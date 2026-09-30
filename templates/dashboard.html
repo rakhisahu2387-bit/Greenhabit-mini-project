@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Dashboard - GreenHabit</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>🌱 GreenHabit</h1>
+
+    <h2>Welcome, {{ name }}! 👋</h2>
+
+    <p>Track your sustainable habits every day.</p>
+
+    <hr>
+
+    <h2>📊 Today's Progress</h2>
+
+    <h1>{{ progress }}%</h1>
+
+    <p>
+        {{ completed_today }} out of
+        {{ total_habits }} habits completed
+    </p>
+
+    <div class="progress-container">
+
+        <div class="progress-bar"
+             style="width: {{ progress }}%;">
+        </div>
+
+    </div>
+
+    <h2>🔥 Current Streak</h2>
+
+    <h1>{{ streak }} day{% if streak != 1 %}s{% endif %}</h1>
+
+    <hr>
+
+    <h3>My Sustainable Habits</h3>
+
+    <a href="/habits">
+        <button>Choose My Habits</button>
+    </a>
+
+    <br><br>
+
+    <a href="/track">
+        <button>Track Today's Habits</button>
+    </a>
+
+    <br><br>
+    <a href="/progress">
+        <button>View Weekly Progress</button>
+    </a>
+
+    <a href="/logout">
+        <button>Logout</button>
+    </a>
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Track Habits - GreenHabit</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>🌱 GreenHabit</h1>
+
+    <h2>Today's Sustainable Habits</h2>
+
+    <p>Date: {{ today }}</p>
+
+    <p>
+        Mark the habits you completed today.
+    </p>
+
+    <form method="POST">
+
+        {% if habits %}
+
+            {% for habit in habits %}
+
+                <div class="habit-card">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            name="completed"
+                            value="{{ habit[0] }}"
+                            {% if habit[0] in completed %}
+                            checked
+                            {% endif %}
+                        >
+
+                        <strong>{{ habit[1] }}</strong>
+
+                    </label>
+
+                    <p>{{ habit[2] }}</p>
+
+                </div>
+
+            {% endfor %}
+
+            <br>
+
+            <button type="submit">
+                Save Today's Progress
+            </button>
+
+        {% else %}
+
+            <p>
+                You have not selected any habits yet.
+            </p>
+
+            <a href="/habits">
+                <button type="button">
+                    Choose Habits
+                </button>
+            </a>
+
+        {% endif %}
+
+    </form>
+
+    <br>
+
+    <a href="/dashboard">
+        <button>Back to Dashboard</button>
+    </a>
+
+</body>
+
+</html>
