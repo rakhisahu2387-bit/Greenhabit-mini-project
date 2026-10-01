@@ -1,37 +1,57 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Weekly Progress- GreenHabit</title>
-        <link rel="stylesheet"
-        href="{{url_for('static',filename='style.css')}}">
-    </head>
-    <body>
-        <h1>🌱GreenHabit</h1>
-        <h2>📊Weekly Progress</h2>
-        <p> Your sustainable habit activity for the last 7 days.</p>
-        <div class="chart">
+
+<head>
+
+    <title>Weekly Progress - GreenHabit</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>🌱 GreenHabit</h1>
+
+    <h2>📊 Weekly Progress</h2>
+
+    <p>Your sustainable habit activity for the last 7 days.</p>
+
+    <div class="chart">
+
         {% for day in weekly_data %}
 
         <div class="bar-box">
-            <div class="bar"style="height:{{ day.height}}px;">
-                <span>{{ day.completed}}</span>
-        </div>
-        <p>{{ day.short_date}}</p>
+
+            <div class="bar"
+                 style="height: {{ day.height }}px;">
+
+                <span>{{ day.completed }}</span>
+
+            </div>
+
+            <p>{{ day.short_date }}</p>
+
         </div>
 
         {% endfor %}
-        </div>
 
-        <h3>Completed Habits This Week</h3>
+    </div>
 
-        <p>
-            Total completed:
-            <strong>{{ total_completed}}</strong>
-        </p>
+    <h3>Completed Habits This Week</h3>
 
-        <br>
-        <a href="/dashboard">
-            <button>Back to Dashboard</button>
-        </a>
-    </body>
+    <p>
+        Total completed:
+        <strong>{{ total_completed }}</strong>
+    </p>
+
+    <br>
+
+    <a href="/dashboard">
+        <button>Back to Dashboard</button>
+    </a>
+
+</body>
+
 </html>

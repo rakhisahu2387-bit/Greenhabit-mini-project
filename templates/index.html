@@ -1,25 +1,113 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>GreenHabit</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <title>GreenHabit - Sustainable Habit Tracker</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
 
-    <h1>🌱 GreenHabit</h1>
+    <div class="home-container">
 
-    <h2>Sustainable Habit Tracking System</h2>
+        <div class="home-content">
 
-    <p>Track your environmentally friendly habits every day.</p>
+            <div class="home-logo">
+                🌱
+            </div>
 
-    <a href="/login">
-    <button>Login</button>
-</a>
+            <h1>GreenHabit</h1>
 
-<a href="/register">
-    <button>Register</button>
-</a>
+            <h2>Build Better Habits.<br>Build a Greener Future.</h2>
+
+            <p>
+                Track your everyday sustainable habits,
+                monitor your progress and make a positive
+                difference one day at a time.
+            </p>
+
+            <div class="home-buttons">
+
+                <a href="/login">
+                    <button>Login</button>
+                </a>
+
+                <a href="/register">
+                    <button>Create Account</button>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="feature-section">
+
+            <h2>🌿 What You Can Do</h2>
+
+            <div class="features">
+
+                <div class="feature-card">
+
+                    <div>💧</div>
+
+                    <h3>Save Water</h3>
+
+                    <p>
+                        Build simple water-saving habits.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div>♻️</div>
+
+                    <h3>Recycle</h3>
+
+                    <p>
+                        Track your waste-reduction habits.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div>⚡</div>
+
+                    <h3>Save Energy</h3>
+
+                    <p>
+                        Follow habits that reduce energy use.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div>🌳</div>
+
+                    <h3>Care for Nature</h3>
+
+                    <p>
+                        Develop habits that support the environment.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </body>
+
 </html>

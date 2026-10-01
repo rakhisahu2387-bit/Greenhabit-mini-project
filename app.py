@@ -25,7 +25,7 @@ def create_database():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS habits (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
+            name TEXT NOT NULL UNIQUE,
             category TEXT
         )
     """)
@@ -73,6 +73,7 @@ def create_database():
 
 @app.route("/")
 def home():
+
     return render_template("index.html")
 
 
@@ -167,7 +168,6 @@ def dashboard():
     conn = sqlite3.connect("greenhabit.db")
     cursor = conn.cursor()
 
-    # Total selected habits
     cursor.execute(
         """
         SELECT COUNT(*)
@@ -179,7 +179,6 @@ def dashboard():
 
     total_habits = cursor.fetchone()[0]
 
-    # Today's completed habits
     today = str(date.today())
 
     cursor.execute(
@@ -197,13 +196,16 @@ def dashboard():
 
     conn.close()
 
-    # Calculate percentage
     if total_habits > 0:
-        progress = int((completed_today / total_habits) * 100)
+
+        progress = int(
+            (completed_today / total_habits) * 100
+        )
+
     else:
+
         progress = 0
 
-    # Calculate streak
     streak = calculate_streak(user_id)
 
     return render_template(
@@ -357,13 +359,19 @@ def track():
             (user_id,)
         )
 
-        selected_habits = [row[0] for row in cursor.fetchall()]
+        selected_habits = [
+            row[0]
+            for row in cursor.fetchall()
+        ]
 
         for habit_id in selected_habits:
 
             if str(habit_id) in completed_habits:
+
                 completed = 1
+
             else:
+
                 completed = 0
 
             cursor.execute(
@@ -375,7 +383,12 @@ def track():
                 ON CONFLICT(user_id, habit_id, log_date)
                 DO UPDATE SET completed = excluded.completed
                 """,
-                (user_id, habit_id, today, completed)
+                (
+                    user_id,
+                    habit_id,
+                    today,
+                    completed
+                )
             )
 
         conn.commit()
@@ -404,7 +417,10 @@ def track():
         (user_id, today)
     )
 
-    completed_today = [row[0] for row in cursor.fetchall()]
+    completed_today = [
+        row[0]
+        for row in cursor.fetchall()
+    ]
 
     conn.close()
 
@@ -415,7 +431,8 @@ def track():
         today=today
     )
 
-#-----------------WEEKLY PROGRESS---------
+
+# ---------------- WEEKLY PROGRESS ----------------
 
 @app.route("/progress")
 def progress():
@@ -424,15 +441,19 @@ def progress():
         return redirect("/login")
 
     user_id = session["user_id"]
+
     conn = sqlite3.connect("greenhabit.db")
     cursor = conn.cursor()
 
     weekly_data = []
 
+    total_completed = 0
+
     today = date.today()
 
-    for i in range(6,-1,-1):
-        current_date = today -timedelta(days=i)
+    for i in range(6, -1, -1):
+
+        current_date = today - timedelta(days=i)
 
         cursor.execute(
             """
@@ -442,21 +463,105 @@ def progress():
             AND log_date = ?
             AND completed = 1
             """,
-            (user_id,str(current_date))
+            (
+                user_id,
+                str(current_date)
+            )
         )
 
         completed = cursor.fetchone()[0]
+
+        total_completed += completed
+
+        height = completed * 40
+
+        if height > 200:
+
+            height = 200
+
         weekly_data.append({
-            "date":str(current_date),
-            "completed":completed
+
+            "date": str(current_date),
+
+            "short_date":
+                current_date.strftime("%a"),
+
+            "completed": completed,
+
+            "height": height
+
         })
 
-        conn.close()
+    conn.close()
 
-        return render_template(
-            "progress.html",
-            weekly_data=weekly_data
-        )
+    return render_template(
+        "progress.html",
+        weekly_data=weekly_data,
+        total_completed=total_completed
+    )
+
+
+# ---------------- PROFILE ----------------
+
+@app.route("/profile")
+def profile():
+
+    if "user_id" not in session:
+        return redirect("/login")
+
+    user_id = session["user_id"]
+
+    conn = sqlite3.connect("greenhabit.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT name, email
+        FROM users
+        WHERE id = ?
+        """,
+        (user_id,)
+    )
+
+    user = cursor.fetchone()
+
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM user_habits
+        WHERE user_id = ?
+        """,
+        (user_id,)
+    )
+
+    total_habits = cursor.fetchone()[0]
+
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM habit_logs
+        WHERE user_id = ?
+        AND completed = 1
+        """,
+        (user_id,)
+    )
+
+    total_completed = cursor.fetchone()[0]
+
+    conn.close()
+
+    streak = calculate_streak(user_id)
+
+    return render_template(
+        "profile.html",
+        name=user[0],
+        email=user[1],
+        total_habits=total_habits,
+        total_completed=total_completed,
+        streak=streak
+    )
+
+
 # ---------------- LOGOUT ----------------
 
 @app.route("/logout")

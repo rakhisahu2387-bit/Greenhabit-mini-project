@@ -12,57 +12,105 @@
 
 <body>
 
-    <h1>🌱 GreenHabit</h1>
+    <div class="dashboard">
 
-    <h2>Welcome, {{ name }}! 👋</h2>
+        <h1>🌱 GreenHabit</h1>
 
-    <p>Track your sustainable habits every day.</p>
+        <h2>Welcome, {{ name }}! 👋</h2>
 
-    <hr>
+        <p>Make small changes. Create a greener future.</p>
 
-    <h2>📊 Today's Progress</h2>
+        <hr>
 
-    <h1>{{ progress }}%</h1>
+        <h2>📊 Today's Progress</h2>
 
-    <p>
-        {{ completed_today }} out of
-        {{ total_habits }} habits completed
-    </p>
+        <div class="progress-card">
 
-    <div class="progress-container">
+            <h1>{{ progress }}%</h1>
 
-        <div class="progress-bar"
-             style="width: {{ progress }}%;">
+            <p>
+                {{ completed_today }} out of
+                {{ total_habits }} habits completed
+            </p>
+
+            <div class="progress-container">
+
+                <div class="progress-bar"
+                     style="width: {{ progress }}%;">
+                </div>
+
+            </div>
+
         </div>
 
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <h2>🔥</h2>
+
+                <h3>{{ streak }}</h3>
+
+                <p>Day Streak</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h2>✅</h2>
+
+                <h3>{{ completed_today }}</h3>
+
+                <p>Completed Today</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h2>🌿</h2>
+
+                <h3>{{ total_habits }}</h3>
+
+                <p>My Habits</p>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h2>🌿 Manage Your Habits</h2>
+
+        <a href="/habits">
+            <button>Choose My Habits</button>
+        </a>
+
+        <br><br>
+
+        <a href="/track">
+            <button>✅ Track Today's Habits</button>
+        </a>
+
+        <br><br>
+
+        <a href="/progress">
+            <button>📊 View Weekly Progress</button>
+        </a>
+        <br><br>
+
+<a href="/profile">
+    <button>👤 My Profile</button>
+</a>
+
+        <br><br>
+
+        <a href="/logout">
+            <button>Logout</button>
+        </a>
+
     </div>
-
-    <h2>🔥 Current Streak</h2>
-
-    <h1>{{ streak }} day{% if streak != 1 %}s{% endif %}</h1>
-
-    <hr>
-
-    <h3>My Sustainable Habits</h3>
-
-    <a href="/habits">
-        <button>Choose My Habits</button>
-    </a>
-
-    <br><br>
-
-    <a href="/track">
-        <button>Track Today's Habits</button>
-    </a>
-
-    <br><br>
-    <a href="/progress">
-        <button>View Weekly Progress</button>
-    </a>
-
-    <a href="/logout">
-        <button>Logout</button>
-    </a>
 
 </body>
 

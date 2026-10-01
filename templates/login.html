@@ -2,42 +2,66 @@
 <html>
 
 <head>
+
     <title>Login - GreenHabit</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
 
-    <h1>🌱 GreenHabit</h1>
+    <div class="auth-container">
 
-    <h2>Login</h2>
+        <div class="auth-card">
 
-    <form method="POST">
+            <div class="logo">
+                🌱
+            </div>
 
-        <input type="email"
-               name="email"
-               placeholder="Enter your email"
-               required>
+            <h1>GreenHabit</h1>
 
-        <br><br>
+            <h2>Welcome Back!</h2>
 
-        <input type="password"
-               name="password"
-               placeholder="Enter your password"
-               required>
+            <p class="subtitle">
+                Continue your sustainable journey.
+            </p>
 
-        <br><br>
+            <form method="POST">
 
-        <button type="submit">Login</button>
+                <label>Email</label>
 
-    </form>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
 
-    <p>
-        Don't have an account?
-        <a href="/register">Register</a>
-    </p>
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+            <p class="auth-link">
+                Don't have an account?
+                <a href="/register">Create Account</a>
+            </p>
+
+        </div>
+
+    </div>
 
 </body>
 

@@ -2,44 +2,75 @@
 <html>
 
 <head>
-    <title>Register - GreenHabit</title>
+
+    <title>Create Account - GreenHabit</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
 
-    <h1>🌱 GreenHabit</h1>
+    <div class="auth-container">
 
-    <h2>Create Account</h2>
+        <div class="auth-card">
 
-    <form method="POST">
+            <div class="logo">
+                🌱
+            </div>
 
-        <input type="text"
-               name="name"
-               placeholder="Enter your name"
-               required>
+            <h1>GreenHabit</h1>
 
-        <br><br>
+            <h2>Create Account</h2>
 
-        <input type="email"
-               name="email"
-               placeholder="Enter your email"
-               required>
+            <p class="subtitle">
+                Start your sustainable journey today.
+            </p>
 
-        <br><br>
+            <form method="POST">
 
-        <input type="password"
-               name="password"
-               placeholder="Enter password"
-               required>
+                <label>Name</label>
 
-        <br><br>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
 
-        <button type="submit">Register</button>
+                <label>Email</label>
 
-    </form>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+                <button type="submit">
+                    Create Account
+                </button>
+
+            </form>
+
+            <p class="auth-link">
+                Already have an account?
+                <a href="/login">Login</a>
+            </p>
+
+        </div>
+
+    </div>
 
 </body>
 
